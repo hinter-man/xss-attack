@@ -1,0 +1,26 @@
+version: '3'
+
+services: 
+  web-blog:
+    build: .
+    container_name: unsafe-twitter
+    ports:
+      - 3000:3000
+    volumes: 
+      - ./:/usr/src/app
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - database
+
+  database:
+    image: mysql
+    container_name: unsafe-twitter-db
+    restart: always
+    ports: 
+      - 3306:3306
+    volumes: 
+      - ./data:/docker-entrypoint-initdb.d
+    environment: 
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'twitter_db'

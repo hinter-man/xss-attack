@@ -1,7 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-
 
 const config = {
   name: 'xss-web-application',
@@ -10,12 +8,13 @@ const config = {
 
 const app = express();
 
+app.use(express.static('public'))
 app.use(bodyParser.json());
-app.use(cors());
 
 app.get('/', (req, res) => {
-  res.status(200).send('hello world');
+  res.status(200).send('Hell Mandi');
 });
+
 
 app.listen(config.port, config.host, (error) => {
   if (error) {
@@ -23,3 +22,4 @@ app.listen(config.port, config.host, (error) => {
   }
   console.log(`server running on port ${config.port}`);
 });
+
