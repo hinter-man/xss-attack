@@ -1,0 +1,32 @@
+{
+  "name": "xss-attack",
+  "version": "1.0.0",
+  "description": "simple web application to show a cross site scripting (xss) attack",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hinter-man/xss-attack.git"
+  },
+  "keywords": [
+    "xss"
+  ],
+  "author": "Manuel und Rene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hinter-man/xss-attack/issues"
+  },
+  "homepage": "https://github.com/hinter-man/xss-attack#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
