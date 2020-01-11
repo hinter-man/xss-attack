@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <form class="form-group">
+        <div class="media">
+          <img src="img/profile.png" class="align-self-center mr-3 rounded-circle" alt="profile picture">
+          <div class="media-body">
+            <div class="row">
+              <input type="text" class="form-control form-control-lg ml-3" placeholder="What's happening?">
+            </div>
+            <div class="row justify-content-end pt-1">
+              <button type="submit" style="background-color: rgb(29, 161, 242);" class="btn btn-primary">Tweet</button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+<hr class="col-sm-8" />
+
+<div class="row justify-content-center">
+  <div id="tweet-list" class="col-sm-8">
+
+    {{!-- TODO --}}
+    {{#each data}}
+    <div class="media">
+      <img src="img/profile.png" class="mr-3 rounded-circle" alt="profile picture">
+      <div class="media-body">
+
+        <h5 style="display: inline;">{{ this.Username }}</h5>
+        <p style="display: inline; color: grey;">{{ this.CreationDate }}</p>
+        <p>{{ this.Text }}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+
+
+  </div>
+</div>
