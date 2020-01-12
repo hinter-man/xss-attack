@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql')
-var exphbs  = require('express-handlebars');
+var exphbs = require('express-handlebars');
 
 const config = {
   name: 'xss-web-application',
@@ -22,24 +22,29 @@ app.use(bodyParser.json());
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-
 app.get('/', (req, res) => {
 
   connectionPool.getConnection((err, connection) => {
-
-  // fetch tweets from db
-  connection.query(
+    // fetch tweets from db
+    connection.query(
       'SELECT * FROM twitter_db.Tweet',
       function (err, rows) {
-        if (err) console.error(err);
+        if (err) {
+          res.status(404).send('something went wrong!');
+          console.err(err);
+        }
+        // fill template engine with data
         res.render('body', {
           data: rows
         });
       });
     connection.release();
   });
+});
 
-  //// res.sendFile(__dirname + '/public/twitter.html');
+app.post('/', (req, res) => {
+  console.log(req);
+  res.status(204);
 });
 
 app.use(express.static('public'));
