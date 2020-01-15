@@ -17,13 +17,49 @@ const connectionPool = mysql.createPool({
 
 const app = express();
 
-app.use(bodyParser.json());
-
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-app.get('/', (req, res) => {
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
+app.get('/', (req, res) => {
+  getAll(res);
+});
+
+app.post('/', (req, res) => {
+  insert(res, 'Mani', req.body.tweet, '/');
+});
+
+
+app.use(express.static('public'));
+
+app.listen(config.port, config.host, (error) => {
+  if (error) {
+    throw new Error('Internal Server Error');
+  }
+  console.log(`server running on port ${config.port}`);
+});
+
+
+function insert(res, userName, tweetText, redirectTo) {
+  connectionPool.getConnection((err, connection) => {
+    connection.query(
+      "INSERT INTO `twitter_db`.`Tweet` (`Username`, `CreationDate`, `Text`)" +
+      " VALUES (?, ?, ?)",
+      [userName , new Date(), tweetText],
+      (err, rows) => {
+        if (err) {
+          res.status(404).send(err);
+        }
+        res.redirect(redirectTo);
+      }
+    )
+    connection.release();
+  });
+}
+
+function getAll(res) {
   connectionPool.getConnection((err, connection) => {
     // fetch tweets from db
     connection.query(
@@ -40,19 +76,4 @@ app.get('/', (req, res) => {
       });
     connection.release();
   });
-});
-
-app.post('/', (req, res) => {
-  console.log(req);
-  res.status(204);
-});
-
-app.use(express.static('public'));
-
-app.listen(config.port, config.host, (error) => {
-  if (error) {
-    throw new Error('Internal Server Error');
-  }
-  console.log(`server running on port ${config.port}`);
-});
-
+}
