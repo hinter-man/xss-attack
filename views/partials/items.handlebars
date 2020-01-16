@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div id="tweet-list" class="col-sm-8">
+    {{#each data}}
+    <div class="media mt-2">
+      <img src="img/profile.png" class="mr-3 rounded-circle" alt="profile picture">
+      <div class="media-body">
+
+        <h5 style="display: inline;">{{ this.Username }}</h5>
+        <p style="display: inline; color: grey;">{{ this.CreationDate }}</p>
+        <p class="m-0">{{{ this.Text }}}</p>
+        <a href="#" onclick="sendLike({{ this.Id }})">
+          <span class="badge badge-pill badge-dark">
+            <img src="img/icons8-heart-outline-20.png" alt="heart" />
+            {{ this.LikeCount }}
+          </span>
+        </a>
+
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+</div>
+<script>
+  function sendLike(id) {
+    $.ajax({
+      method: 'POST',
+      url: '/like',
+      contentType: 'application/json',
+      data: JSON.stringify({ id: id }),
+      success(data) {
+        console.log(data);
+      },
+      error(xhr) {
+        console.log(xhr);
+      }
+    });
+    return false;
+  }
+</script>

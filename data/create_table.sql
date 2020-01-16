@@ -3,4 +3,5 @@ CREATE TABLE `twitter_db`.`Tweet` (
   `Username` VARCHAR(50) NULL,
   `CreationDate` DATETIME NULL,
   `Text` VARCHAR(140) NULL,
+  `LikeCount` INT NOT NULL,
   PRIMARY KEY (`Id`));
