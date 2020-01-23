@@ -14,11 +14,14 @@ insipred by [TweetDeck XSS Tweet](https://dev.to/ben/my-all-time-favorite-demons
 
 #### items.handlebars
 
-- Raw Input (XSS): ```<p class="m-0">{{{ this.Text }}}</p>```
-- Escaped: ```<p class="m-0">{{ this.Text }}</p>```
+- Raw Input (XSS)
+  - `<p class="m-0">{{{ this.Text }}}</p>`
+- Escaped:
+  - `<p class="m-0">{{ this.Text }}</p>`
 
 ### Server side
 
 #### server.js
 
-TODO
+- escape input tweet text
+  - `let tweet = escape(req.body.tweet);`

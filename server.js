@@ -39,7 +39,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  insert(res, 'Mani', req.body.tweet, '/');
+  //let tweet = escape(req.body.tweet);
+  let tweet = req.body.tweet;
+  insert(res, 'Mani', tweet, '/');
 });
 
 app.post('/like', (req, res) => {
