@@ -6,6 +6,7 @@ insipred by [TweetDeck XSS Tweet](https://dev.to/ben/my-all-time-favorite-demons
 
 ## Example attack
 
+### "likes" the first entry on every page reload
 ```<script>$('a')[0].click();</script>```
 
 ## Mitigation
